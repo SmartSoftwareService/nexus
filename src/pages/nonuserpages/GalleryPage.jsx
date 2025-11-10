@@ -1,8 +1,13 @@
 import React from 'react'
+import GallerySection from '../../components/nonuser/gallery/GallerySection.jsx';
+import EventStory from '../../components/nonuser/gallery/EventStory.jsx';
 
 const GalleryPage = () => {
   return (
-    <div>GalleryPage</div>
+    <div>
+      <GallerySection />
+      <EventStory />
+    </div>
   )
 }
 
