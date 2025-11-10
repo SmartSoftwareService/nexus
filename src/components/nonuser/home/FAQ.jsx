@@ -51,7 +51,7 @@ function FAQ() {
       {/* FAQ Items */}
       <div className="max-w-7xl mx-auto">
         {faqs.map((faq, idx) => (
-          <div 
+          <div  
             key={idx} 
             className="mb-3 sm:mb-4 transition-all duration-300 hover:scale-[1.01]"
           >
