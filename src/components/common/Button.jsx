@@ -12,7 +12,7 @@ const Button = ({ text = "Know more", onClick }) => {
         gap-1
         bg-white
         rounded-full 
-        text-gray-600 
+        text-gray-600  
         cursor-pointer 
         text-lg 
         px-8 py-3
