@@ -1,4 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
+
+@theme {
+  --font-clash: "Clash Display";
+}
+
+@utility font-clash {
+  font-family: var(--font-clash);
+}
 
 body {
   @apply bg-[#141414];
