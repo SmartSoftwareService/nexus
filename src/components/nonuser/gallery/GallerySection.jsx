@@ -43,7 +43,7 @@ export default function GallerySection() {
   alt="Stack 1"
   className="absolute top-0 left-0 w-full h-full object-cover rounded-xl border border-white transition-all duration-500 grayscale group-hover:grayscale-0"
 />
-
+          
             </div>
 
             <p className="mt-4 text-base sm:text-lg font-semibold tracking-wide text-center text-amber-300 group-hover:text-yellow-400 transition">
