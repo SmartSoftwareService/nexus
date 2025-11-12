@@ -28,14 +28,14 @@
     "image": "/src/assets/shubham/abhijeet.png"
   },
   {
-    "id": 3,
+    "id": 5,
     "name": "Dr. Meera Nair",
     "experience": "12+ Years Experience",
     "designation": "Machine Learning Expert",
     "image": "/src/assets/shubham/abhijeet.png"
   },
   {
-    "id": 4,
+    "id": 6,
     "name": "Prof. Karan Singh",
     "experience": "7+ Years Experience",
     "designation": "Software Engineering Mentor",
@@ -43,7 +43,7 @@
   },
   
   {
-    "id": 4,
+    "id": 7,
     "name": "Prof. Karan Singh",
     "experience": "7+ Years Experience",
     "designation": "Software Engineering Mentor",
