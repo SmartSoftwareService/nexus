@@ -32,7 +32,7 @@ export default function GallerySection() {
                 src={getImageSrc(album.images[2])}
                 alt="Stack 3"
                 className="absolute top-0 left-[10%] w-full h-full object-cover rounded-xl border border-gray-400 shadow-[0_0_20px_rgba(255,140,0,0.6)] opacity-60 transition-all duration-500 grayscale group-hover:grayscale-0"
-              />
+                />
               <img
                 src={getImageSrc(album.images[1])}
                 alt="Stack 2"
