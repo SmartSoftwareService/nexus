@@ -51,7 +51,7 @@ function Navbar() {
           borderBottomRightRadius: "1.2rem",
         }}
       >
-        {/* Left: Logo */}
+        {/* Left: Logo */} 
         <div className="flex items-center">
           <h1 className="text-2xl lg:text-3xl font-medium flex items-center justify-center">
             <span className="text-white font-playfair">NE</span>
