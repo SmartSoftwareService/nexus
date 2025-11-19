@@ -1,18 +1,29 @@
 import React, { useState, useEffect } from "react";
+import { ROUTES } from "../../core/constants/routes.constant";
+import { useLocation, useNavigate } from "react-router-dom";
+import Button from "../common/Button";
 
 const NAV_LINKS = [
-  { label: "Home", href: "/" },
-  { label: "About us", href: "#about" },
-  { label: "Courses", href: "#courses" },
-  { label: "Gallery", href: "#gallery" },
-  { label: "Placements", href: "#placements" },
-  { label: "Contact us", href: "#contact" },
+  { label: "Home", href: ROUTES.HOME },
+  { label: "About us", href: ROUTES.ABOUT },
+  { label: "Courses", href: ROUTES.COURSES },
+  { label: "Gallery", href: ROUTES.GALLERY },
+  { label: "Placements", href: ROUTES.PLACEMENTS },
+  { label: "Contact us", href: ROUTES.CONTACT },
 ];
 
 function Navbar() {
-  const [activeTab, setActiveTab] = useState("Home");
+  const [activeTab, setActiveTab] = useState("");
+  const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const currentPath = location.pathname;
+    const activeLink = NAV_LINKS.find((link) => link.href === currentPath);
+    setActiveTab(activeLink ? activeLink.label : "");
+  }, [location.pathname]);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -40,12 +51,17 @@ function Navbar() {
           borderBottomRightRadius: "1.2rem",
         }}
       >
-        {/* Left: Logo */}
+        {/* Left: Logo */} 
         <div className="flex items-center">
-          <h1 className="text-2xl lg:text-3xl font-extrabold">
-            <span className="text-white">NE</span>
-            <span className="text-orange-500">X</span>
-            <span className="text-white">US</span>
+          <h1 className="text-2xl lg:text-3xl font-medium flex items-center justify-center">
+            <span className="text-white font-playfair">NE</span>
+            <span className="text-orange-500 text-5xl pt-1">
+              <svg width="40" height="34" viewBox="0 0 40 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M31.5408 0.000221879L39.5234 0.00080831L34.5562 2.77579C33.3436 3.45323 32.2854 4.37587 31.4491 5.4849L12.364 30.7934C11.2302 32.2968 9.45642 33.1808 7.57341 33.1808H-0.000190735L5.03663 30.275C6.22264 29.5907 7.25551 28.6702 8.07121 27.5704L26.7213 2.42583C27.8531 0.899828 29.6409 8.23028e-05 31.5408 0.000221879Z" fill="#FF6A00"/>
+                <path d="M7.98262 0.000221879L0 0.00080831L4.96721 2.77579C6.17983 3.45323 7.23802 4.37587 8.07433 5.4849L27.1595 30.7934C28.2932 32.2968 30.067 33.1808 31.95 33.1808H39.5236L34.4868 30.275C33.3008 29.5907 32.2679 28.6702 31.4522 27.5704L12.8022 2.42583C11.6703 0.899828 9.88257 8.23028e-05 7.98262 0.000221879Z" fill="#FF6A00"/>
+              </svg>
+            </span>
+            <span className="text-white font-playfair">US</span>
           </h1>
         </div>
 
@@ -76,63 +92,18 @@ function Navbar() {
 
         {/* Right: Test Button */}
         <div className="hidden lg:flex items-center justify-end">
-          <button
-            className="flex items-center justify-between w-32 h-12 px-4 py-2
-              bg-[#FFF6EF] border-2 border-orange-400 rounded-full
-              shadow-[0_4px_8px_rgba(0,0,0,0.12)] transition
-              hover:shadow-md hover:scale-105 active:scale-95"
-          >
-            <span className="text-lg font-normal text-black">Test</span>
-            <span
-              className="ml-2 flex items-center justify-center 
-              w-8 h-8 bg-orange-500 rounded-full"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="2"
-                stroke="white"
-                className="w-5 h-5"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M8 16l8-8M8 8h8v8"
-                />
-              </svg>
-            </span>
-          </button>
+          <Button 
+            text="Test"
+            onClick={() => navigate(ROUTES.LOGIN)}
+          />
         </div>
 
         {/* Mobile Section */}
         <div className="flex lg:hidden items-center space-x-4">
-          <button
-            className="flex items-center justify-between w-20 h-10 px-3 py-1
-              bg-[#FFF6EF] border-2 border-orange-400 rounded-full
-              shadow-[0_4px_8px_rgba(0,0,0,0.12)]"
-          >
-            <span className="text-sm font-normal text-black">Test</span>
-            <span
-              className="ml-1 flex items-center justify-center 
-              w-6 h-6 bg-orange-500 rounded-full"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="2"
-                stroke="white"
-                className="w-4 h-4"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M8 16l8-8M8 8h8v8"
-                />
-              </svg>
-            </span>
-          </button>
+          <Button 
+            text="Test"
+            onClick={() => navigate(ROUTES.LOGIN)}
+          />
 
           {/* Hamburger */}
           <button

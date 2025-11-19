@@ -5,7 +5,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 // Import JSON data
-import OurClientdata from "../../../assets/sneha/json/OurClientdata.json"
+import OurClientdata from "../../../assets/sneha/json/OurClientdata.json";
+import CircleBackground from "../../common/CircleBackground";
 
 // Import images dynamically
 import client1 from "../../../assets/sneha/client1.png";
@@ -55,7 +56,7 @@ function OurClient() {
     "client18.png": client18,
     "client19.png": client19,
     "client20.png": client20,
-    "client21.png": client21
+    "client21.png": client21,
   };
 
   const { clients, metrics } = OurClientdata;
@@ -77,30 +78,36 @@ function OurClient() {
       { breakpoint: 1024, settings: { slidesToShow: 4, speed: 1700 } },
       { breakpoint: 768, settings: { slidesToShow: 3, speed: 1400 } },
       { breakpoint: 480, settings: { slidesToShow: 2, speed: 900 } },
-      { breakpoint: 360, settings: { slidesToShow: 1, speed: 800 } }
-    ]
+      { breakpoint: 360, settings: { slidesToShow: 1, speed: 800 } },
+    ],
   };
 
   return (
-    <div className="py-8 lg:py-12 px-3 sm:px-6 md:px-8 text-white mt-10">
+    <div className="relative flex flex-col justify-center overflow-hidden px-12 sm:px-12 md:px-12 text-white">
+      <div className="absolute z-0 w-1/3 h-9/12 -translate-y-347 -translate-x-250">
+        <CircleBackground />
+      </div>
+      <div className="absolute z-0 w-1/3 h-9/12 -translate-y-392 translate-x-240">
+        <CircleBackground />
+      </div>
       {/* Clients Section */}
-      <div className="mb-10 lg:mb-14 ">
+      <div className="z-1 mb-10 lg:mb-14 mt-1">
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-left mb-6 lg:mb-8 mr-6">
-  Our Clients
-</h2>
-    {/* Divider Line */}
-      <div
-        className="w-full h-[1px] sm:h-[2px] my-8 lg:my-12"
-        style={{
-          background:
-            "linear-gradient(90deg, #030e4e 0%, #b9b4b4 50%, #030e4e 100%)"
-        }}
-      />
+          Our Clients
+        </h2>
+        {/* Divider Line */}
+        <div
+          className="w-full h-[1px] sm:h-[2px] my-6 lg:my-6"
+          style={{
+            background:
+              "linear-gradient(90deg, #030e4e 0%, #b9b4b4 50%, #030e4e 100%)",
+          }}
+        />
         <div className="relative">
           <Slider {...sliderSettings}>
             {clients.map((client, idx) => (
               <div key={idx} className="px-2">
-                <div className="flex items-center justify-center p-2 sm:p-4">
+                <div className="flex items-center justify-center px-2 sm:px-4">
                   <img
                     src={imageMap[client.src]}
                     alt={client.name}
@@ -108,7 +115,7 @@ function OurClient() {
                     style={{
                       filter: "brightness(0) invert(1)",
                       opacity: 0.9,
-                      maxWidth: "100%"
+                      maxWidth: "100%",
                     }}
                     onClick={() => setIsPaused(true)}
                   />
@@ -118,7 +125,7 @@ function OurClient() {
           </Slider>
         </div>
         {isPaused && (
-          <div className="text-center mt-4">
+          <div className="text-center mt-1">
             <button
               className="px-4 py-2 bg-white text-black rounded-lg hover:bg-gray-200 transition-colors duration-200 text-sm sm:text-base"
               onClick={() => setIsPaused(false)}
@@ -131,15 +138,15 @@ function OurClient() {
 
       {/* Divider Line */}
       <div
-        className="w-full h-[1px] sm:h-[2px] my-8 lg:my-12"
+        className="z-1 w-full h-[1px] sm:h-[2px] mb-8 lg:mb-12"
         style={{
           background:
-            "linear-gradient(90deg, #030e4e 0%, #b9b4b4 50%, #030e4e 100%)"
+            "linear-gradient(90deg, #030e4e 0%, #b9b4b4 50%, #030e4e 100%)",
         }}
       />
 
       {/* Metrics Section */}
-      <div className="mb-10 lg:mb-14 max-w-7xl mx-auto">
+      <div className="z-1 mb-10 lg:mb-14 max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
           {/* Left */}
           <div className="lg:w-1/2">
@@ -147,9 +154,9 @@ function OurClient() {
               We Build Success by the Numbers
             </h2>
             <p className="text-base sm:text-lg lg:text-xl text-gray-300 mb-6 lg:mb-0 text-center lg:text-left leading-relaxed">
-              Our impact is measured not just in satisfied clients, but in tangible
-              results. We create measurable differences, turning potential into
-              performance and ambition into achievement.
+              Our impact is measured not just in satisfied clients, but in
+              tangible results. We create measurable differences, turning
+              potential into performance and ambition into achievement.
             </p>
           </div>
 
@@ -168,7 +175,11 @@ function OurClient() {
                       suffix={
                         item.value >= 1000
                           ? "+"
-                          : ["Years of Experience", "Courses", "Collab Colleges"].includes(item.label)
+                          : [
+                              "Years of Experience",
+                              "Courses",
+                              "Collab Colleges",
+                            ].includes(item.label)
                           ? "+"
                           : ""
                       }
@@ -189,7 +200,7 @@ function OurClient() {
         className="w-full h-[1px] sm:h-[2px] my-8 lg:my-12"
         style={{
           background:
-            "linear-gradient(90deg, #030e4e 0%, #b9b4b4 50%, #030e4e 100%)"
+            "linear-gradient(90deg, #030e4e 0%, #b9b4b4 50%, #030e4e 100%)",
         }}
       />
     </div>
