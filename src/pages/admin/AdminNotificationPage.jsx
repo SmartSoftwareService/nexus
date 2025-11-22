@@ -1,11 +1,13 @@
 import React from 'react'
-import data from "../../assets/saniya/Adminnotification.json";
+import notifications from "../../assets/saniya/Adminnotification.json";
+
 
 const AdminNotificationPage = () => {
    return (
-    <div className="text-white p-4 md:p-8  ">
+    <div className="text-white p-3 md:p-8 w-full ">
+      <div className='w-max-[2400px]'>
 
-      <h6 className="mb-3 text-3xl md:text-4xl text-center md:text-left">
+      <h6 className="mb-3 text-5xl md:text-4xl text-center md:text-left pb-5 ">
         Notifications
       </h6>
 
@@ -16,9 +18,9 @@ const AdminNotificationPage = () => {
       {notifications.userEnrollmentNotifications.map((item, index) => (
         <div
           key={index}
-          className="w-full border border-gray-100 rounded-md mb-4 bg-gray-900"
+          className="w-full border border-gray-300 rounded-md mb-4 bg-[#242424]"
         >
-          <p className="p-3 text-sm md:text-base text-center md:text-left">
+          <p className="p-3 text-lg md:text-base text-center md:text-left">
             {item}
           </p>
         </div>
@@ -31,14 +33,14 @@ const AdminNotificationPage = () => {
       {notifications.systemTechnicalAlerts.map((item, index) => (
         <div
           key={index}
-          className="w-full border border-gray-100 rounded-md mb-4 bg-gray-900"
+          className="w-full border border-gray-300 rounded-md mb-4 bg-[#242424]"
         >
           <p className="p-3 text-sm md:text-base text-center md:text-left">
             {item}
           </p>
         </div>
       ))}
-
+      </div>
     </div>
   );
 };
