@@ -3,7 +3,6 @@ import coursesData from "../../assets/shubham/coursesdata.json";
 import CourseCard from "../../components/common/CoursesCard";
 
 const CoursesPage = () => {
-  // Helper to trim description to 25 words
   const truncateDescription = (text, wordLimit = 35) => {
     if (!text) return "";
     const words = text.split(" ");
