@@ -1,8 +1,11 @@
 import React from "react";
 import { RiNotification4Fill } from "react-icons/ri";
 import profile from "../../assets/tarushri/profile.png";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../../core/constants/routes.constant";
 
 const AdminNavbar = () => {
+  const navigate = useNavigate();
   return (
     <div className="w-full font-sora">
       <div className="max-w-[2400px]">
@@ -43,9 +46,9 @@ const AdminNavbar = () => {
                     gap-3 sm:gap-4 lg:gap-5"
           >
             {/* Notification Icon */}
-            <div
+            <div onClick={() => navigate(ROUTES.ADMIN_NOTIFICATION)}
               className="w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 
-                      bg-five rounded-full 
+                      bg-five rounded-full cursor-pointer
                       flex justify-center items-center 
                       text-xl sm:text-2xl lg:text-3xl"
             >
@@ -55,8 +58,9 @@ const AdminNavbar = () => {
             {/* User Image */}
             <div>
               <img
+                onClick={() => navigate(ROUTES.ADMIN_PROFILE)}
                 src={profile}
-                className="w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 rounded-full border-2 border-orange-500 object-cover"
+                className="w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 rounded-full border-2 border-orange-500 object-cover cursor-pointer"
               />
             </div>
           </div>

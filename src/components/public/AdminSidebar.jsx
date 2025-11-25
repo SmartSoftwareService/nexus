@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ROUTES } from "../../core/constants/routes.constant";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   LogOut,
   LayoutDashboard,
@@ -26,6 +26,7 @@ const NAV_LINKS = [
 
 function AdminSidebar({ isOpen, setIsOpen }) {
   const [activeTab, setActiveTab] = useState("Dashboard");
+  const navigate = useNavigate();
   // const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -49,14 +50,14 @@ function AdminSidebar({ isOpen, setIsOpen }) {
               to={item.href}
               onClick={() => setActiveTab(item.label)}
               className={({ isActive }) => `
-        flex items-center transition-all duration-200 rounded-lg py-2
-        ${isOpen ? "px-3 gap-4" : "justify-center"} 
-        ${
-          isActive || activeTab === item.label
-            ? "bg-[#FFF6EF] text-black border border-[#e8d7c9]"
-            : "text-one hover:bg-[#3a3838]"
-        }
-      `}
+                flex items-center transition-all duration-200 rounded-lg py-2
+                ${isOpen ? "px-3 gap-4" : "justify-center"} 
+                ${
+                  isActive || activeTab === item.label
+                    ? "bg-[#FFF6EF] text-black border border-[#e8d7c9]"
+                    : "text-one hover:bg-[#3a3838]"
+                }
+              `}
             >
               <span className="flex justify-center items-center w-6 h-6">
                 {React.cloneElement(item.icon, {
@@ -78,24 +79,28 @@ function AdminSidebar({ isOpen, setIsOpen }) {
         {/* === LOGOUT === */}
         <div className="pb-20">
           <button
+            onClick={() => {
+              // 🔥 TEMP LOGOUT LOGIC
+              localStorage.clear();
+              sessionStorage.clear();
+              navigate("/");
+            }}
             className={`
-            flex items-center 
-            transition-all duration-300
-            ${
-              isOpen
-                ? "px-4 py-2 w-44 mx-auto bg-[#FFF6EF] border border-[#e8d7c9] rounded-full justify-between"
-                : "w-full justify-center"
-            }
+              flex items-center cursor-pointer
+              transition-all duration-300
+              ${
+                isOpen
+                  ? "px-4 py-2 w-44 mx-auto bg-[#FFF6EF] border border-[#e8d7c9] rounded-full justify-between"
+                  : "w-full justify-center"
+              }
             `}
           >
-            {/* COLLAPSED → CENTERED ORANGE BUBBLE */}
             {!isOpen && (
               <span className="flex justify-center items-center w-10 h-10 bg-five rounded-full">
                 <LogOut size={18} className="text-one" />
               </span>
             )}
 
-            {/* EXPANDED → TEXT + ORANGE BUBBLE */}
             {isOpen && (
               <>
                 <span className="text-sm font-medium text-black">Log out</span>
