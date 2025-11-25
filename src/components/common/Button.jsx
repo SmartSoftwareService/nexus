@@ -4,13 +4,23 @@ const Button = ({ text, onClick }) => {
   return (
     <button
       onClick={onClick}
-      className="flex gap-3 cursor-pointer text-black font-semibold bg-gradient-to-r from-white to-[#b9b6b6] px-5 py-3 font-bold
-        rounded-full border border-gray-600 hover:scale-105 duration-200 hover:text-white hover:border-gray-800 text-sm
-        hover:from-black hover:to-gray-900 items-center"
+      style={{
+        borderTop: "2px solid transparent",
+        borderBottom: "2px solid transparent",
+        borderImage: "linear-gradient(to right, transparent, #f97316, transparent) 2"
+      }}
+      className="
+        flex bg-one shadow-[inset_2px_2px_6px_rgba(0,0,0,0.75)] border-2
+        rounded-full px-6 py-3 gap-3 text-three items-center justify-center
+      "
     >
       {text}
-      <span className="relative z-10 flex items-center justify-center bg-gradient-to-br from-[#ff4d00] to-[#ff5100] 
-        rounded-full w-[28px] h-[28px] shadow-md hover:scale-105 transition-transform duration-300"
+
+      <span
+        className="relative z-10 flex items-center justify-center 
+        bg-five
+        rounded-full w-[28px] h-[28px] shadow-md
+        hover:scale-105 transition-transform duration-300"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
