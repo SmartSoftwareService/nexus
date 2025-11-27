@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../../core/constants/routes.constant";
 
 import upcomingData from "../../../assets/shubham/upcomingdb.json";
+import { getIconByName } from "../../../core/utils/iconMap"; // <-- Correct import
+
 
 const UpcomingBatches = () => {
   const navigate = useNavigate();
@@ -31,11 +33,14 @@ const UpcomingBatches = () => {
   };
 
   return (
+    
     <div className="w-full text-white font-sans py-2 px-12 md:px-10">
       {/* Title */}
       <h1 className="text-3xl md:text-4xl font-semibold mb-8 tracking-wide">
         Upcoming Batches
       </h1>
+      
+      
 
       {/* Header Row (Desktop Only) */}
       <div className="hidden md:grid grid-cols-5 text-gray-300 text-lg border border-gray-700 rounded-lg px-6 py-4 mb-8">
@@ -45,6 +50,14 @@ const UpcomingBatches = () => {
         <span className="text-center">Fees</span>
         <span className="text-center">Contact</span>
       </div>
+      {/* Course + Icon */}
+<div className="flex items-center gap-4 md:w-1/5 mb-3 md:mb-0">
+  <div className="bg-[#2c2c2c] p-2 rounded-full flex items-center justify-center">
+    {getIconByName(c.icon)}   {/* 🔥 USE THIS ONLY */}
+  </div>
+  <span className="text-[15px] font-medium">{c.name}</span>
+</div>
+
 
       {/* Search bar */}
       <div className="relative mb-10 w-full max-w-sm">
