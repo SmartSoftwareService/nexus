@@ -1,31 +1,22 @@
 import React, { useState } from "react";
-import { FaMagnifyingGlass, FaGear } from "react-icons/fa6";
-import * as Fa6Icons from "react-icons/fa6";
-import * as FaIcons from "react-icons/fa";
+import { FaMagnifyingGlass } from "react-icons/fa6"; 
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../../core/constants/routes.constant";
 
 import upcomingData from "../../../assets/shubham/upcomingdb.json";
 import { getIconByName } from "../../../core/utils/iconMap"; // <-- Correct import
 
-
 const UpcomingBatches = () => {
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
 
   // ✅ Filter by search
-  const filtered = upcomingData.filter(c =>
+  const filtered = upcomingData.filter((c) =>
     c.name.toLowerCase().includes(search.toLowerCase())
   );
 
   // ✅ Show only 5 items on Home page
   const displayedCourses = filtered.slice(0, 5);
-
-  // Icon resolver
-  const getIcon = (iconName) => {
-    const Icon = Fa6Icons[iconName] || FaIcons[iconName] || Fa6Icons.FaGear;
-    return <Icon className="text-lg text-white" />;
-  };
 
   // 👉 Navigate to full upcoming page
   const handleSeeMore = () => {
@@ -33,31 +24,12 @@ const UpcomingBatches = () => {
   };
 
   return (
-    
     <div className="w-full text-white font-sans py-2 px-12 md:px-10">
+
       {/* Title */}
       <h1 className="text-3xl md:text-4xl font-semibold mb-8 tracking-wide">
         Upcoming Batches
       </h1>
-      
-      
-
-      {/* Header Row (Desktop Only) */}
-      <div className="hidden md:grid grid-cols-5 text-gray-300 text-lg border border-gray-700 rounded-lg px-6 py-4 mb-8">
-        <span>Course name</span>
-        <span className="text-center">Duration</span>
-        <span className="text-center">Start date</span>
-        <span className="text-center">Fees</span>
-        <span className="text-center">Contact</span>
-      </div>
-      {/* Course + Icon */}
-<div className="flex items-center gap-4 md:w-1/5 mb-3 md:mb-0">
-  <div className="bg-[#2c2c2c] p-2 rounded-full flex items-center justify-center">
-    {getIconByName(c.icon)}   {/* 🔥 USE THIS ONLY */}
-  </div>
-  <span className="text-[15px] font-medium">{c.name}</span>
-</div>
-
 
       {/* Search bar */}
       <div className="relative mb-10 w-full max-w-sm">
@@ -71,6 +43,15 @@ const UpcomingBatches = () => {
         />
       </div>
 
+      {/* Header Row (Desktop Only) */}
+      <div className="hidden md:grid grid-cols-5 text-gray-300 text-lg border border-gray-700 rounded-lg px-6 py-4 mb-8">
+        <span>Course name</span>
+        <span className="text-center">Duration</span>
+        <span className="text-center">Start date</span>
+        <span className="text-center">Fees</span>
+        <span className="text-center">Contact</span>
+      </div>
+
       {/* Course List */}
       <div className="flex flex-col gap-4">
         {displayedCourses.map((c) => (
@@ -78,10 +59,11 @@ const UpcomingBatches = () => {
             key={`${c.id}-${c.name}`}
             className="relative flex flex-col md:flex-row md:items-center md:justify-between bg-[#1A1A1A] border border-[#4a4a4a] rounded-2xl md:rounded-full px-6 md:px-8 py-5 hover:bg-[#252525] transition-all duration-300"
           >
+
             {/* Course + Icon */}
             <div className="flex items-center gap-4 md:w-1/5 mb-3 md:mb-0">
               <div className="bg-[#2c2c2c] p-2 rounded-full flex items-center justify-center">
-                {getIcon(c.icon)}
+                {getIconByName(c.icon)} {/* ✔ Only here */}
               </div>
               <span className="text-[15px] font-medium">{c.name}</span>
             </div>
@@ -113,11 +95,7 @@ const UpcomingBatches = () => {
                   stroke="currentColor"
                   strokeWidth={3}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M7 17l10-10M7 7h10v10"
-                  />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M7 17l10-10M7 7h10v10" />
                 </svg>
               </span>
             </div>
