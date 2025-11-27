@@ -1,9 +1,8 @@
-import React from 'react'
+import axios from "axios";
+import { SERVER_URL } from "../constants/serverURLConstant";
 
-const apiService = () => {
-  return (
-    <div>apiService</div>
-  )
-}
+const api = axios.create({
+  baseURL: SERVER_URL,
+});
 
-export default apiService
+export default api;
