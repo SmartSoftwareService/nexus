@@ -103,7 +103,7 @@ const UpcomingBatches = () => {
         <div className="flex justify-end my-6">
           <button
             onClick={handleSeeMore}
-            className="text-[15px] font-semibold text-gray-200 hover:text-white transition-all duration-200 underline-offset-4 hover:underline"
+            className="text-[15px] font-semibold text-gray-200 hover:text-white transition-all duration-200 underline-offset-4 hover:underline cursor-pointer"
           >
             See more
           </button>
