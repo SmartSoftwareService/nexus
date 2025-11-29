@@ -22,14 +22,6 @@ const PartnerSection = () => {
   const rightData = partnerData.filter((item) => item.side === "right");
 
   return (
-<<<<<<< HEAD
-    <>
-      <div className="relative w-full min-h-[70vh] pt-10">
-        {/* Title */}
-        <div className="flex p-10 align-text-top text-3xl text-white">
-          <h1>Why Partner with Nexus?</h1>
-        </div>
-=======
     <div className="relative w-full min-h-screen pt-10">
       
       {/* Title */}
@@ -38,7 +30,6 @@ const PartnerSection = () => {
           Why Partner with Nexus?
         </h1>
       </div>
->>>>>>> c1667304dec95633974e14020dc2871a55c6131d
 
       <div className="absolute flex flex-col items-center justify-center text-white px-4 md:px-12 py-10 w-full">
 
