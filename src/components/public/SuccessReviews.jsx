@@ -29,7 +29,7 @@ const SuccessReviews = () => {
   }, []);
 
   return (
-    <div className="relative w-full text-white py-2 px-12 ">
+    <div className="relative w-full text-white py-2 px-2 sm:px-5  md:px-10  ">
       {/* ✅ Title */}
       <h2 className="text-start text-2xl sm:text-3xl md:text-5xl font-extrabold mb-8 sm:mb-8 tracking-wide text-white  ">
         Success stories/ Reviews
@@ -38,7 +38,7 @@ const SuccessReviews = () => {
         {/* ✅ Auto-Scrolling Gallery */}
         <div
           ref={mainScrollRef}
-          className="w-full overflow-x-hidden whitespace-nowrap pb-6 "
+          className="w-full overflow-x-hidden whitespace-nowrap pb-6"
           onMouseEnter={() => (isMainPaused.current = true)}
           onMouseLeave={() => (isMainPaused.current = false)}
         >
