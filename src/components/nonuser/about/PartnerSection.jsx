@@ -23,7 +23,7 @@ const PartnerSection = () => {
   const rightData = partnerData.filter((item) => item.side === "right");
 
   return (
-    <div className="relative w-full min-h-[75vh] pt-10">
+    <div className="relative w-full min-h-[78vh] pt-10 pb-10">
       
       {/* Title */}
       <div className="flex px-5 md:px-10">
@@ -32,7 +32,7 @@ const PartnerSection = () => {
         </h1>
       </div>
 
-      <div className="absolute flex flex-col items-center justify-center text-white px-4 md:px-12 py-10 w-full">
+      <div className="flex flex-col items-center justify-center text-white px-4 md:px-12 py-10 w-full">
 
         {/* ================= DESKTOP / TABLET VIEW ================= */}
         <div className="hidden md:flex flex-col lg:flex-row items-center justify-center gap-6 w-full max-w-[1200px]">
@@ -67,9 +67,9 @@ const PartnerSection = () => {
 
           {/* CENTER CIRCLE */}
           <motion.div
-            className="flex justify-center items-center w-[200px] h-[200px] md:w-[240px] md:h-[240px] rounded-full 
-              bg-[radial-gradient(circle,_rgba(255,106,0,0.30)_5%,_rgba(255,106,0,0.1)_60%)] 
-              border-dashed border-[2px] border-gray-500 shadow-[0_0_20px_rgba(0,65,255,0.3)]"
+            className="flex justify-center items-center w-[200px] h-[200px] md:w-60 md:h-60 rounded-full 
+              bg-[radial-gradient(circle,rgba(255,106,0,0.30)_5%,rgba(255,106,0,0.1)_60%)] 
+              border-dashed border-2 border-gray-500 shadow-[0_0_20px_rgba(0,65,255,0.3)]"
             animate={{
               scale: [1, 1.05, 1],
               boxShadow: ["0 0 20px rgba(0,65,255,0.3)", "0 0 40px rgba(0,65,255,0.5)", "0 0 20px rgba(0,65,255,0.3)"],
@@ -107,39 +107,48 @@ const PartnerSection = () => {
         </div>
 
         {/* ================= MOBILE VIEW ================= */}
-        <div className="flex md:hidden flex-col items-center gap-5 mt-6 w-full">
-          {/* Center Circle */}
-          <motion.div
-            className="flex justify-center items-center w-[160px] h-[160px] rounded-full 
-              bg-[radial-gradient(circle,_#0041FF_0%,_#0A0A0F_70%)] 
-              shadow-[0_0_40px_#0041FF] border-dashed border-[2px] border-gray-500 text-center"
-            animate={{ scale: [1, 1.05, 1] }}
-            transition={{ repeat: Infinity, duration: 2 }}
-          >
-            <h2 className="text-sm font-semibold leading-tight">Why Partner <br/> with Nexus?</h2>
-          </motion.div>
+        <div className="flex md:hidden flex-col items-center gap-4 w-full">
 
-          {/* Render all items */}
-          {partnerData.map((item, i) => {
-            const Icon = icons[item.icon];
-            const align = i % 2 === 0 ? "self-start" : "self-end";
-            return (
-              <div
-                key={item.id}
-                className={`flex items-center gap-4 bg-[#383838] rounded-full px-5 py-4 
-                  w-[95%] sm:w-[80%] border border-white shadow-md ${align}`}
-              >
-                <div className="bg-[#101010] w-14 h-14 rounded-full flex justify-center items-center shrink-0">
-                  <Icon className="text-2xl text-white" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-sm">{item.title}</h3>
-                  <p className="text-xs text-gray-400">{item.description}</p>
-                </div>  
-              </div>
-            );
-          })}
+  {/* Center Circle */}
+  <motion.div
+  animate={{
+              scale: [1, 1.05, 1],
+              boxShadow: ["0 0 20px rgba(0,65,255,0.3)","0 0 40px rgba(0,65,255,0.5)", "0 0 20px rgba(0,65,255,0.3)"],
+            }}
+            transition={{ repeat: Infinity, duration: 2 }}
+    className="flex justify-center items-center w-40 h-40 mb-7 rounded-full 
+      bg-[radial-gradient(circle,rgba(255,106,0,0.30)_5%,rgba(255,106,0,0.1)_60%)] 
+      shadow-[0_0_40px_#0041FF] border-dashed border-2 border-gray-500 text-center"
+  >
+    <h2 className="text-sm font-semibold">
+      Why Partner <br /> with Nexus?
+    </h2>
+  </motion.div>
+
+  {/* Items */}
+  {partnerData.map((item, i) => {
+    const Icon = icons[item.icon];
+    const align = i % 2 === 0 ? "self-start" : "self-end";
+
+    return (
+      <div
+        key={item.id}
+        className={`flex items-center gap-4 bg-[#383838] rounded-full px-5 py-4 
+          w-[95%] sm:w-[80%] border border-white shadow-md ${align}`}
+      >
+        <div className="bg-[#101010] w-14 h-14 rounded-full flex justify-center items-center shrink-0">
+          <Icon className="text-2xl text-white" />
         </div>
+
+        <div>
+          <h3 className="font-semibold text-sm">{item.title}</h3>
+          <p className="text-xs text-gray-400">{item.description}</p>
+        </div>
+      </div>
+    );
+  })}
+</div>
+
       </div>
     </div>
   );
