@@ -11,9 +11,9 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     let storedUser = StorageService.getData("user");
     if (storedUser) {
-    setUser(storedUser);   // remove JSON.parse !
-    setIsLoggedIn(true);
-}
+      setUser(storedUser);
+      setIsLoggedIn(true);
+    }
   }, []);
 
   const login = useCallback((userData) => {
