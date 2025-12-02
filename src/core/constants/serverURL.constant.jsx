@@ -9,7 +9,7 @@ class ServerUrl {
     // static REACT_APP_API_URL = "http://31.97.231.187:3000/api"
 
 
-    static API_MODULE_USER = "/auth";
+    static API_MODULE_USER = "/api/auth";
     static API_LOGIN = ServerUrl.API_MODULE_USER + "/login";
     static API_REGISTER = ServerUrl.API_MODULE_USER + "/signup";
     // static API_UPDATE_USER = ServerUrl.API_MODULE_USER + "/update";    
@@ -17,7 +17,7 @@ class ServerUrl {
     // static API_DELETE_USER = ServerUrl.API_MODULE_USER + "/delete";
 
     // master module
-    static API_MODULE_MASTER = "/master";    
+    static API_MODULE_MASTER = "/api/master";    
 
     // COURSE CATEGORY APIs
     static API_ADD_COURSE_CATEGORY = ServerUrl.API_MODULE_MASTER + "/course-category";
@@ -41,7 +41,7 @@ class ServerUrl {
     static API_DELETE_BATCH = ServerUrl.API_MODULE_MASTER + "/batches/"; // + id
  
     // MEDIA MODULE
-    static API_MODULE_MEDIA = "/media";    
+    static API_MODULE_MEDIA = "/api/media";    
 
     // CITY APIs
     static API_ADD_CITY = ServerUrl.API_MODULE_MEDIA + "/city";
@@ -64,7 +64,7 @@ class ServerUrl {
     static API_DELETE_MEDIA = ServerUrl.API_MODULE_MEDIA + "/media/"; // + id
 
     // EVENT MODULE
-    static API_MODULE_EVENTS = "/events";
+    static API_MODULE_EVENTS = "/api/events";
 
     // EVENT CRUD
     static API_CREATE_EVENT = ServerUrl.API_MODULE_EVENTS + "/";
@@ -78,7 +78,7 @@ class ServerUrl {
     static API_DELETE_EVENT_IMAGE = ServerUrl.API_MODULE_EVENTS + "/image/";   // + id
 
     // TESTS MODULE
-    static API_MODULE_TESTS = "/tests";
+    static API_MODULE_TESTS = "/api/tests";
 
     // CATEGORY APIs
     static API_CREATE_TEST_CATEGORY = ServerUrl.API_MODULE_TESTS + "/category";

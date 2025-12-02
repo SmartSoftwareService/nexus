@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../core/contexts/AuthContext";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
+import { ROUTES } from "../../core/constants/routes.constant";
 import ApiService from "../../core/services/api.service";
 import ServerUrl from "../../core/constants/serverURL.constant";
 import Button from "../../components/common/Button";
@@ -38,9 +39,9 @@ const LoginForm = ({ email, password, setEmail, setPassword, onSubmit }) => (
       onChange={(e) => setPassword(e.target.value)}
     />
 
-    <Button 
+    <Button
+      type="submit"
       text="Submit"
-      onClick={onSubmit}
       className="mb-4 text-2xl font-bold"
       showIcon={false}
     />
@@ -67,43 +68,29 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const inputValue = email.trim();
-    const isEmail = inputValue.includes("@");
-    const isMobile = /^[6-9]\d{9}$/.test(inputValue);
-
-    if (!inputValue) return toast.error("Please enter mobile number or email");
-    if (!isEmail && !isMobile)
-      return toast.error("Enter a valid email or 10-digit mobile number");
-
+    
     try {
-      const payload = {};
+      const response = await new ApiService().apipost(ServerUrl.API_LOGIN, {
+        emailOrPhone: email,
+        password: password,
+      });
 
-      if (isEmail) payload.email = inputValue;
-      if (isMobile) payload.mobile = inputValue;
+      // Save user
+      login(response.data);
 
-      payload.password = password;
+      // Role-based redirect
+      const role = response.data.user?.roles?.[0]?.roleName;
 
-      const response = await new ApiService().apipost(
-        ServerUrl.API_LOGIN,
-        payload
-      );
-      console.log("Login API Response:", response);
-
-      const { user, token } = response.data;
-      login({ user, token });
-
-      toast.success(`Welcome back, ${user?.name || "User"}!`);
-
-      const roleRedirectMap = {
-        admin: "/dashboard",
-        user: "/",
-      };
-
-      const redirectTo = roleRedirectMap[user?.role] || "/";
-      navigate(redirectTo, { replace: true });
-    } catch (err) {
-      toast.error(err.response?.data?.message || "Login failed");
+      if (role === "admin") {
+        navigate(ROUTES.ADMIN_DASHBOARD);
+      } else if (role === "user") {
+        navigate(ROUTES.USER_APPITUDE);
+      } else {
+        navigate(ROUTES.HOME);
+      }
+    } catch (error) {
+      console.log("Login error:", error);
+      alert("Invalid login");
     }
   };
 

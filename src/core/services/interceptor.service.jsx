@@ -5,7 +5,7 @@ import ServerUrl from "../constants/serverURL.constant";
 
 class ApiInterceptor {
   static axiosReference = axios.create({
-    baseURL: ServerUrl.REACT_APP_API_URL || import.meta.env.VITE_REACT_APP_API_URL,
+    baseURL: ServerUrl.REACT_APP_API_URL,
   });
 
   static requestCounts = 0;
