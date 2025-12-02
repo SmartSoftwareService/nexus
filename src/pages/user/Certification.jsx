@@ -1,7 +1,7 @@
 import React from "react";
 import jsPDF from "jspdf";
-import img from "../assets/Certificate.jpeg";
-import certificateData from "../Components/data/CertificateData.json";
+import img from "../../assets/saidas/Certificate.jpeg";
+import certificateData from "../../assets/saidas/CertificateData.json";
 
 const Certification = () => {
   // DOWNLOAD PDF DIRECT FROM BACKGROUND + TEXT
