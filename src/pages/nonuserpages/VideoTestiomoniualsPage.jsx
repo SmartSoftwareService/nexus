@@ -1,14 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import data from "../../assets/sneha/json/Video.json";
+import ApiService from "../../core/services/api.service";
+import ServerUrl from "../../core/constants/serverURL.constant";
 
 const VideoTestiomoniualsPage = () => {
+  const api = new ApiService();
   const [videos, setVideos] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
   const [currentVideo, setCurrentVideo] = useState(null);
 
+  // 🔥 FETCH VIDEOS FROM BACKEND
   useEffect(() => {
-    setVideos(data.videos);
+    api
+      .apiget(ServerUrl.API_GET_VIDEOS)
+      .then((res) => {
+        const list = res?.data?.data || [];
+
+        // Normalize response for frontend usage
+        const formatted = list.map((v) => ({
+          id: v.video_id,
+          caption: v.caption,
+          about: v.about,
+          thumbnail: v.image, // same field name used in JSON version
+          videoUrl: v.videoUrl,
+        }));
+
+        setVideos(formatted);
+      })
+      .catch((err) => console.error("VIDEO FETCH ERROR:", err));
   }, []);
 
   const openPopup = (video) => {
@@ -23,7 +42,7 @@ const VideoTestiomoniualsPage = () => {
 
   return (
     <div className="px-6 py-10 min-h-screen text-one">
-      {/* Title Animation */}
+      {/* Title */}
       <motion.h1
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -38,12 +57,12 @@ const VideoTestiomoniualsPage = () => {
         {videos.map((item, index) => (
           <motion.div
             key={item.id}
-            className="bg-twopointo rounded-2xl shadow-xl overflow-hidden cursor-pointer 
-           border border-transparent transition-all duration-300
-           hover:border-orange-500 hover:shadow-[0_0_15px_rgba(255,115,0,0.8)]"
+            className="flex flex-col justify-center items-center rounded-2xl shadow-xl overflow-hidden cursor-pointer 
+              border border-transparent transition-all duration-300
+            hover:border-orange-500 hover:shadow-[0_0_15px_rgba(255,115,0,0.8)]"
             whileHover={{ scale: 1.05 }}
             initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}   // Lazy animation when visible
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ delay: index * 0.1, duration: 0.4 }}
             onClick={() => openPopup(item)}
@@ -54,10 +73,10 @@ const VideoTestiomoniualsPage = () => {
                 src={item.thumbnail}
                 alt={item.caption}
                 loading="lazy"
-                className="w-full h-full object-contain"
+                className="w-full h-full object-cover"
               />
 
-              {/* Play Icon Animation */}
+              {/* Play Icon */}
               <motion.div
                 className="absolute inset-0 flex items-center justify-center"
                 animate={{ scale: [1, 1.2, 1] }}
