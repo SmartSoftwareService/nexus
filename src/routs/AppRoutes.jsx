@@ -55,12 +55,16 @@ import Login from "../pages/auth/Login";
 import Signup from "../pages/auth/Signup";
 
 const AppRoutes = () => {
-  const { isLoggedIn, isLoading, user } = useAuth();
+  // const { isLoggedIn, isLoading, user } = useAuth();
 
-  if (isLoading) return <div className="text-center mt-10">Loading...</div>;
+  // if (isLoading) return <div className="text-center mt-10">Loading...</div>;
 
   return (
     <Routes>
+      {/* AUTH ROUTES (Public layout) */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+
       {/* 🌍 PUBLIC ROUTES */}
       <Route element={<PublicLayout />}>
         <Route path="/" element={<HomePage />} />
@@ -80,32 +84,6 @@ const AppRoutes = () => {
           element={<VideoTestiomoniualsPage />}
         />
         <Route path="/contact" element={<ContactPage />} />
-
-        {/* AUTH ROUTES (Public layout) */}
-        <Route
-          path="/login"
-          element={
-            !isLoggedIn ? (
-              <Login />
-            ) : user?.role === "admin" ? (
-              <Navigate to="/dashboard" />
-            ) : (
-              <Navigate to="/appitude" />
-            )
-          }
-        />
-        <Route
-          path="/signup"
-          element={
-            !isLoggedIn ? (
-              <Signup />
-            ) : user?.role === "admin" ? (
-              <Navigate to="/dashboard" replace />
-            ) : (
-              <Navigate to="/appitude" replace />
-            )
-          }
-        />
       </Route>
 
       {/* 👤 USER ROUTES */}

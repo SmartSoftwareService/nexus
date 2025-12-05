@@ -23,7 +23,7 @@ export default function GallerySection() {
 
         // ⭐ Auto-select first city
         if (cityList.length > 0) {
-          setSelectedCity(cityList[0].id);
+          setSelectedCity("all");
         }
       })
       .catch((err) => console.error("CITY FETCH ERROR:", err));
@@ -35,6 +35,12 @@ export default function GallerySection() {
 
     setLoading(true);
 
+    if (selectedCity === "all") {
+      loadAllColleges();
+      return;
+    }
+
+    // Normal mode → fetch specific city colleges
     api
       .apiget(ServerUrl.API_GET_COLLEGES_BY_CITY + selectedCity)
       .then((res) => {
@@ -47,6 +53,37 @@ export default function GallerySection() {
         setLoading(false);
       });
   }, [selectedCity]);
+
+  const loadAllColleges = async () => {
+    try {
+      let allColleges = [];
+
+      // Fetch all cities (already in state)
+      for (const city of cities) {
+        const res = await api.apiget(
+          ServerUrl.API_GET_COLLEGES_BY_CITY + city.id
+        );
+
+        const list = res?.data?.data || [];
+
+        // We also need city info for album navigation
+        const enriched = list.map((college) => ({
+          ...college,
+          cityName: city.name,
+          cityId: city.id,
+        }));
+
+        allColleges.push(...enriched);
+      }
+
+      // Now fetch images for all colleges
+      await fetchCollegeImages(allColleges);
+    } catch (err) {
+      console.error("ALL-COLLEGE FETCH ERROR:", err);
+      setColleges([]);
+      setLoading(false);
+    }
+  };
 
   // 🔥 Fetch images for each college
   const fetchCollegeImages = async (collegeList) => {
@@ -78,10 +115,10 @@ export default function GallerySection() {
 
   // 🔥 Navigate to album
   const openAlbum = (college, city) => {
-  navigate(`/gallery/album/${college.id}`, {
-    state: { college, city },
-  });
-};
+    navigate(`/gallery/album/${college.id}`, {
+      state: { college, city },
+    });
+  };
 
   const thumb = (college) =>
     college.images?.[0] || "/assets/placeholder-college.jpg";
@@ -96,6 +133,16 @@ export default function GallerySection() {
 
       {/* CITY FILTER */}
       <div className="flex flex-wrap gap-4 mb-10 max-w-[2400px] mx-auto">
+        <button
+          onClick={() => setSelectedCity("all")}
+          className={`px-6 py-2 rounded-full border ${
+            selectedCity === "all"
+              ? "bg-orange-500 text-black"
+              : "border-gray-500"
+          }`}
+        >
+          Show All
+        </button>
         {cities.map((city) => (
           <button
             key={city.id}
@@ -130,7 +177,12 @@ export default function GallerySection() {
               <div
                 key={college.id}
                 className="cursor-pointer group"
-                onClick={() => openAlbum(college, cities.find(c => c.id === college.cityId))}
+                onClick={() =>
+                  openAlbum(
+                    college,
+                    cities.find((c) => c.id === college.cityId)
+                  )
+                }
               >
                 <div className="relative w-full aspect-square group-hover:scale-105 duration-500">
                   <img

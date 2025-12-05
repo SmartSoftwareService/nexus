@@ -92,6 +92,14 @@ class ServerUrl {
     // SUBMIT TEST
     static API_SUBMIT_TEST = ServerUrl.API_MODULE_TESTS + "/submit";
 
+    // VIDEO MODULE
+    static API_MODULE_VIDEOS = "/api/uploads";
+    
+    static API_UPLOAD_VIDEO = ServerUrl.API_MODULE_VIDEOS + "/video";
+    static API_GET_VIDEOS = ServerUrl.API_MODULE_VIDEOS + "/video";
+    static API_DELETE_VIDEO = ServerUrl.API_MODULE_VIDEOS + "/video"; // + id
+    static API_UPDATE_VIDEO = ServerUrl.API_MODULE_VIDEOS + "/video"; // + id
+
 }
 console.log("ServerUrl Loaded:", {
   API_BASE: ServerUrl.REACT_APP_API_URL,

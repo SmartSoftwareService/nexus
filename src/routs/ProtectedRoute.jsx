@@ -4,24 +4,21 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../core/contexts/AuthContext";
 
 const ProtectedRoute = ({ allowedRoles }) => {
-  const { isLoggedIn, user } = useAuth();
+  const { isLoggedIn, user, isLoading } = useAuth();
 
-  // ⛔ Not logged in → send to login
-  if (!isLoggedIn || !user) {
-    return <Navigate to={ROUTES.LOGIN} replace />;
+  // Still loading LS data → don't redirect yet
+  if (isLoading) {
+    return <div></div>;
   }
 
-  // Extract stored roles (your format)
-  const userRoles = [user?.role];  // because your API gives { role: "user" }
+  // Not logged in
+  if (!isLoggedIn || !user) {
+    return <Navigate to="/Login" replace />;
+  }
 
-  // ⛔ Logged in but role does not match
-  if (allowedRoles && !allowedRoles.some(role => userRoles.includes(role))) {
-    // USER tries to enter admin page
-    if (userRoles.includes("user")) return <Navigate to={ROUTES.USER_APPITUDE} replace />;
-
-    // ADMIN tries to enter user page
-    if (userRoles.includes("admin")) return <Navigate to={ROUTES.ADMIN_DASHBOARD} replace />;
-
+   if (allowedRoles && !allowedRoles.includes(user.role)) {
+    if (user.role === "user") return <Navigate to={ROUTES.USER_APPITUDE} replace />;
+    if (user.role === "admin") return <Navigate to={ROUTES.ADMIN_DASHBOARD} replace />;
     return <Navigate to={ROUTES.LOGIN} replace />;
   }
 

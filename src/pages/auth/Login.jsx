@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../core/contexts/AuthContext";
 import { FcGoogle } from "react-icons/fc";
-import { toast } from "react-toastify";
 import { ROUTES } from "../../core/constants/routes.constant";
 import ApiService from "../../core/services/api.service";
 import ServerUrl from "../../core/constants/serverURL.constant";
@@ -61,10 +60,21 @@ const LoginForm = ({ email, password, setEmail, setPassword, onSubmit }) => (
 
 const Login = () => {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, isLoggedIn, user } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  // 🔥 AUTO-REDIRECT IF ALREADY LOGGED IN
+  useEffect(() => {
+    if (isLoggedIn && user) {
+      if (user.role === "admin") {
+        navigate(ROUTES.ADMIN_DASHBOARD, { replace: true });
+      } else {
+        navigate(ROUTES.USER_APPITUDE, { replace: true });
+      }
+    }
+  }, [isLoggedIn, user, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -75,17 +85,15 @@ const Login = () => {
         password: password,
       });
 
-      console.log("LOGIN RESPONSE:", response.data); // 🔥 ADD THIS HERE
+      console.log("LOGIN RESPONSE:", response.data);
 
       // Save user
       login(response.data);
 
-      // Role-based redirect
-      const role = response.data.role;
-
-      if (role === "admin") {
+      // Redirect by role
+      if (response.data.role === "admin") {
         navigate(ROUTES.ADMIN_DASHBOARD);
-      } else if (role === "user") {
+      } else if (response.data.role === "user") {
         navigate(ROUTES.USER_APPITUDE);
       } else {
         navigate(ROUTES.HOME);
