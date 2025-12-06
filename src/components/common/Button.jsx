@@ -11,6 +11,7 @@ const Button = ({
     <button
       type={type}
       onClick={onClick}
+      
       style={{
         borderTop: "2px solid transparent",
         borderBottom: "2px solid transparent",
