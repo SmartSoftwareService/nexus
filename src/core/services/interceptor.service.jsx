@@ -28,10 +28,17 @@ class ApiInterceptor {
         ApiInterceptor.requestCounts--;
         return response;
       },
-      (err) => {
+      (error) => {
         ApiInterceptor.requestCounts--;
-        console.error("API Error =>", err);
-        return Promise.reject(err);
+        console.log("API ERROR =>", {
+          url: error.config.url,
+          method: error.config.method,
+          status: error.response?.status,
+          response: error.response?.data,
+          requestHeaders: error.config.headers,
+          payload: error.config.data   // <-- add this
+        });
+        return Promise.reject(error);
       }
     );
 
