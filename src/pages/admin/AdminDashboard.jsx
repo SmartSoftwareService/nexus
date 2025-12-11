@@ -1,4 +1,5 @@
 import React from "react";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { IoPeopleSharp } from "react-icons/io5";
 import { HiUserPlus } from "react-icons/hi2";
 import { FaComputer } from "react-icons/fa6";
@@ -8,9 +9,9 @@ import { MdReviews } from "react-icons/md";
 import { ROUTES } from "../../core/constants/routes.constant";
 import { useNavigate } from "react-router-dom";
 
-// --------------------------------------
+// -----------------------------------------------------
 // STATS DATA
-// --------------------------------------
+// -----------------------------------------------------
 const stats = [
   {
     title: "Total Registered Users",
@@ -68,22 +69,22 @@ const stats = [
   },
 ];
 
-// --------------------------------------
-// AREA CHART DATA
-// --------------------------------------
-const timeRangeData = {
-  "1M": 200,
-  "3M": 600,
-  "9M": 400,
-  "1Y": 700,
-  "3Y": 300,
-  "5Y": 900,
-  "ALL": 750,
-};
+// -----------------------------------------------------
+// GRAPH DATA (one point per period)
+// -----------------------------------------------------
+const graphData = [
+  { period: "1M", users: 200 },
+  { period: "3M", users: 600 },
+  { period: "9M", users: 1200 },
+  { period: "1Y", users: 2800 },
+  { period: "3Y", users: 8400 },
+  { period: "5Y", users: 14000 },
+  { period: "ALL", users: 18000 },
+];
 
-// --------------------------------------
-// STAT CARD
-// --------------------------------------
+// -----------------------------------------------------
+// STAT CARD COMPONENT
+// -----------------------------------------------------
 function StatCard({ title, value, info, icon, click }) {
   const Icons = icon;
   const navigate = useNavigate();
@@ -96,7 +97,6 @@ function StatCard({ title, value, info, icon, click }) {
         text-white shadow-md transition duration-200
         hover:shadow-[0_0_48px_12px_rgba(255,115,0,0.5)]
         cursor-pointer
-
         w-full sm:w-[47%] lg:w-[30%] xl:w-[31%]
       "
     >
@@ -135,63 +135,9 @@ function StatCard({ title, value, info, icon, click }) {
   );
 }
 
-// --------------------------------------
-// AREA CHART RESPONSIVE
-// --------------------------------------
-function AreaChart() {
-  const keys = ["1M", "3M", "9M", "1Y", "3Y", "5Y", "ALL"];
-  const values = keys.map((k) => timeRangeData[k]);
-  const maxValue = Math.max(...values);
-
-  const points = values.map((v, index) => {
-    const x = (index / (values.length - 1)) * 400;
-    const y = 120 - (v / maxValue) * 90;
-    return { x, y };
-  });
-
-  const path = `
-    M0,120
-    ${points.map((p) => `L${p.x},${p.y}`).join(" ")}
-    L400,120 Z
-  `;
-
-  return (
-    <div className="border border-white rounded-2xl p-6 text-white shadow-md mt-6 w-full overflow-x-auto">
-      <div className="text-lg font-semibold">Last 6 Months</div>
-      <div className="text-xl font-bold text-green-400">+15% this month</div>
-
-      {/* CHART WRAPPER — scrollable on mobile */}
-      <div className="relative h-48 mt-6 min-w-[420px]">
-        <svg width="420" height="100%" viewBox="0 0 400 120">
-          <defs>
-            <linearGradient id="chartArea" x1="0" x2="0" y1="1" y2="0">
-              <stop offset="0%" stopColor="#000000" stopOpacity="0" />
-              <stop offset="60%" stopColor="#B85006" stopOpacity="0.35" />
-              <stop offset="100%" stopColor="#FF6A00" stopOpacity="0.85" />
-            </linearGradient>
-          </defs>
-
-          <path
-            d={path}
-            fill="url(#chartArea)"
-            stroke="#FF6A00"
-            strokeWidth="2"
-          />
-        </svg>
-      </div>
-
-      <div className="flex justify-between text-sm text-gray-400 mt-2 min-w-[420px]">
-        {keys.map((k) => (
-          <span key={k}>{k}</span>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-// --------------------------------------
-// MAIN DASHBOARD WITH RESPONSIVE LAYOUT
-// --------------------------------------
+// -----------------------------------------------------
+// MAIN DASHBOARD
+// -----------------------------------------------------
 export default function AdminDashboard() {
   return (
     <section className="w-full">
@@ -199,22 +145,42 @@ export default function AdminDashboard() {
         Dashboard
       </h1>
 
-      {/* STATS CARDS ROW 1 */}
+      {/* STATS ROW 1 */}
       <div className="flex flex-wrap justify-between gap-4 mb-5">
         {stats.slice(0, 3).map((card, i) => (
           <StatCard key={i} {...card} />
         ))}
       </div>
 
-      {/* STATS CARDS ROW 2 */}
+      {/* STATS ROW 2 */}
       <div className="flex flex-wrap justify-between gap-4 mb-6">
         {stats.slice(3, 6).map((card, i) => (
           <StatCard key={i + 3} {...card} />
         ))}
       </div>
 
-      {/* AREA CHART */}
-      <AreaChart />
+      {/* ------------------------------- */}
+      {/* LINE GRAPH WITH PERIODS ON X-AXIS */}
+      {/* ------------------------------- */}
+      <div className="bg-[#1a1a1a] rounded-2xl p-6 border border-zinc-700">
+        <h2 className="text-2xl text-white font-light mb-6">Total Registered Users Growth</h2>
+
+        <ResponsiveContainer width="100%" height={350}>
+          <LineChart data={graphData}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#555" />
+            <XAxis dataKey="period" stroke="#999" />
+            <YAxis stroke="#999" />
+            <Tooltip />
+            <Line
+              type="monotone"
+              dataKey="users"
+              stroke="#ff7300"
+              strokeWidth={3}
+              dot={{ fill: "#fff", stroke: "#ff7300", strokeWidth: 3 }}
+            />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
     </section>
   );
 }
