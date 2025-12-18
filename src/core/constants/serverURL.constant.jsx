@@ -25,12 +25,15 @@ class ServerUrl {
     static API_GET_COURSE_BY_ID = ServerUrl.API_MODULE_MASTER + "/courses/"; // + id
     static API_UPDATE_COURSE = ServerUrl.API_MODULE_MASTER + "/courses/"; // + id
     static API_DELETE_COURSE = ServerUrl.API_MODULE_MASTER + "/courses/"; // + id
+    static API_ADD_COURSE_WITH_DETAILS = ServerUrl.API_MODULE_MASTER + "/courses-full";
 
     // COURSES DETAILS APIs
     static API_ADD_COURSE_DETAILS = ServerUrl.API_MODULE_MASTER + "/course-details"
     static API_GET_COURSE_DETAILS = ServerUrl.API_MODULE_MASTER + "/course-details";
     static API_GET_COURSE_DETAILS_BY_ID = ServerUrl.API_MODULE_MASTER + "/course-details/"; // + id
     static API_UPDATE_COURSE_DETAILS = ServerUrl.API_MODULE_MASTER + "/course-details/"; // + id
+    static API_DELETE_COURSE_DETAILS = ServerUrl.API_MODULE_MASTER + "/course-details/"; // + id
+    static API_GET_CATEGORY_WITH_COURSES = ServerUrl.API_MODULE_MASTER + "/categories-with-courses";
 
     //BATCH APIs
     static API_ADD_BATCH = ServerUrl.API_MODULE_MASTER + "/batches";
@@ -66,15 +69,21 @@ class ServerUrl {
     static API_MODULE_EVENTS = "/api/events";
 
     // EVENT CRUD
-    static API_CREATE_EVENT = ServerUrl.API_MODULE_EVENTS + "/";
-    static API_GET_ALL_EVENTS = ServerUrl.API_MODULE_EVENTS + "/";
-    static API_GET_EVENT_BY_ID = ServerUrl.API_MODULE_EVENTS + "/";     // + id
-    static API_UPDATE_EVENT = ServerUrl.API_MODULE_EVENTS + "/";        // + id
-    static API_DELETE_EVENT = ServerUrl.API_MODULE_EVENTS + "/";        // + id
+    static API_CREATE_EVENT = ServerUrl.API_MODULE_EVENTS + "/gallery";
+    static API_GET_ALL_EVENTS = ServerUrl.API_MODULE_EVENTS + "/gallery";
+    static API_GET_EVENT_BY_ID = ServerUrl.API_MODULE_EVENTS + "/gallery";     // + id
+    static API_UPDATE_EVENT = ServerUrl.API_MODULE_EVENTS + "/gallery";        // + id
+    static API_DELETE_EVENT = ServerUrl.API_MODULE_EVENTS + "/gallery";        // + id
 
     // EVENT IMAGES
     static API_UPLOAD_EVENT_IMAGE = ServerUrl.API_MODULE_EVENTS + "/upload";
     static API_DELETE_EVENT_IMAGE = ServerUrl.API_MODULE_EVENTS + "/image/";   // + id
+
+    // EVENT STORIES
+    static API_CREATE_EVENTSTORIES = ServerUrl.API_MODULE_EVENTS + "/stories";
+    static API_GET_EVENTSTORIES = ServerUrl.API_MODULE_EVENTS + "/stories";
+    static API_UPDATE_EVENTSTORIES = ServerUrl.API_MODULE_EVENTS + "/stories"; // + id
+    static API_DELETE_EVENTSTORIES = ServerUrl.API_MODULE_EVENTS + "/stories"; // + id
 
     // TESTS MODULE
     static API_MODULE_TESTS = "/api/tests";
@@ -103,7 +112,7 @@ class ServerUrl {
     static API_GET_TEST_RESULT = ServerUrl.API_MODULE_TESTS + "/latest/"; // + testId
 
     // USER TEST RESULT APIs
-    // static API_USER_TEST_RESULT = ServerUrl.API_MODULE_TESTS + "/result"; // + /:testId
+    static API_USER_TEST_RESULT = ServerUrl.API_MODULE_TESTS + "/usertest"; // + /:userTestId/summary
 
     // VIDEO MODULE
     static API_MODULE_VIDEOS = "/api/uploads";
@@ -128,12 +137,14 @@ class ServerUrl {
     static API_GET_PLACEMENT_BY_ID = ServerUrl.API_MODULE_PLACEMENTS + "/";   // + id
     static API_UPDATE_PLACEMENT = ServerUrl.API_MODULE_PLACEMENTS + "/";      // + id
     static API_DELETE_PLACEMENT = ServerUrl.API_MODULE_PLACEMENTS + "/";      // + id
+    static API_GET_CATEGORY_WITH_PLACEMENT = ServerUrl.API_MODULE_PLACEMENTS + "/reports/category-year-wise"
     
     /* ---------------- DETAILS APIs ---------------- */
     static API_GET_ALL_PLACEMENT_DETAILS = ServerUrl.API_MODULE_PLACEMENTS + "/details/all";
     static API_GET_PLACEMENT_DETAILS = ServerUrl.API_MODULE_PLACEMENTS + "/details/";  // + id
     static API_CREATE_PLACEMENT_DETAILS = ServerUrl.API_MODULE_PLACEMENTS + "/details";
     static API_UPDATE_PLACEMENT_DETAILS = ServerUrl.API_MODULE_PLACEMENTS + "/details/"; // + id
+    static API_GET_PLACEMENT_AND_DETAILS_BY_ID = ServerUrl.API_MODULE_PLACEMENTS + "/full"; // + id
     
     /* ---------------- YEAR-WISE REPORT ---------------- */
     static API_PLACEMENT_YEAR_WISE = ServerUrl.API_MODULE_PLACEMENTS + "/reports/year-wise";

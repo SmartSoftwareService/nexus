@@ -67,7 +67,7 @@ const AppRoutes = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/courses" element={<CoursesPage />} />
-        <Route path="/courses/:categoryName" element={<CoursesDetailPage />} />
+        <Route path="/courses/category/:categoryId" element={<CoursesDetailPage />} />
         <Route path="/gallery" element={<GalleryPage />} />
         <Route path="/gallery/:collegeId" element={<GalleryCollege />} />
         <Route path="/gallery/album/:id" element={<GalleryInfoPage />} />
@@ -102,24 +102,29 @@ const AppRoutes = () => {
           <Route path="/registerdashboard" element={<NewRegisterDashboard />} />
           <Route path="/testdashboard" element={<CompletedTestDashboard />} />
           <Route path="/visitdashboard" element={<CollegeVisitDashboard />} />
+          <Route path="/reviewsdashboard" element={<TotalReviewsDashboard />} />
           <Route
             path="/placementdashboard"
             element={<TotalPlacementDashboard />}
           />
-          <Route path="/reviewsdashboard" element={<TotalReviewsDashboard />} />
+          {/* Gallery */}
           <Route path="/galleryevent" element={<GalleryEventPage />} />
+          <Route path="/eventdetail/add" element={<GalleryEventDetailPage />} />
+          <Route path="/eventdetail/edit/:id" element={<GalleryEventDetailPage />} />
+          {/* Courses */}
           <Route path="/admincourses" element={<AdminCoursesPage />} />
+          <Route path="/addcourses" element={<AddCoursesPage />} />
+          <Route path="/addcourses/:id" element={<AddCoursesPage />} />
+          {/*  */}
+          <Route path="/visitdetail" element={<CollegeVisitDetailPage />} />
+          <Route path="/placementdetail" element={<PlacementDetailPage />} />
+          <Route path="/registerdetail" element={<RegisterDetailPage />} />
+          <Route path="/completedetail" element={<TestCompleteDetailPage />} />
           <Route
             path="/adminnotification"
             element={<AdminNotificationPage />}
           />
           <Route path="/adminprofile" element={<AdminProfile />} />
-          <Route path="/addcourses" element={<AddCoursesPage />} />
-          <Route path="/visitdetail" element={<CollegeVisitDetailPage />} />
-          <Route path="/eventdetail" element={<GalleryEventDetailPage />} />
-          <Route path="/placementdetail" element={<PlacementDetailPage />} />
-          <Route path="/registerdetail" element={<RegisterDetailPage />} />
-          <Route path="/completedetail" element={<TestCompleteDetailPage />} />
         </Route>
       </Route>
     </Routes>
