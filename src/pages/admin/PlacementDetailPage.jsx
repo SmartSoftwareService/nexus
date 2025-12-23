@@ -106,7 +106,7 @@ export default function PlacementDetailForm({ defaultValues = {}, onSubmit }) {
         );
 
         await api.apiput(
-          `${ServerUrl.API_UPDATE_PLACEMENT_DETAILS}${placementId}`,
+          `${ServerUrl.API_UPDATE_PLACEMENT_DETAILS}/${placementId}`,
           {
             success_story: data.successStory || "",
             facing_challenges: data.challenges || "",
