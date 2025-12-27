@@ -14,7 +14,6 @@ import AboutPage from "../pages/nonuserpages/AboutPage";
 import CoursesPage from "../pages/nonuserpages/CoursesPage";
 import CoursesDetailPage from "../pages/nonuserpages/CoursesDetailPage";
 import GalleryPage from "../pages/nonuserpages/GalleryPage";
-import GalleryCollege from "../pages/nonuserpages/GalleryCollege";
 import GalleryInfoPage from "../pages/nonuserpages/GalleryInfoPage";
 import PlacementPage from "../pages/nonuserpages/PlacementPage";
 import PlacementStoryPage from "../pages/nonuserpages/PlacementStoryPage";
@@ -43,12 +42,10 @@ import AdminCoursesPage from "../pages/admin/AdminCoursesPage";
 import AdminNotificationPage from "../pages/admin/AdminNotificationPage";
 import AdminProfile from "../pages/admin/AdminProfile";
 import AddCoursesPage from "../pages/admin/AddCorsesPage";
-import CollegeVisitDetailPage from "../pages/admin/CollegeVisitDetailPage";
 import PlacementDetailPage from "../pages/admin/PlacementDetailPage";
 import RegisterDetailPage from "../pages/admin/RegisterDetailPage";
 import TestCompleteDetailPage from "../pages/admin/TestCompleteDetailPage";
 import GalleryForm from "../pages/admin/GalleryForm";
-import GalleryCollegePage from "../pages/admin/GalleryCollegePage";
 import GalleryCollegeDetailPage from "../pages/admin/GalleryCollegeDetailPage";
 import GalleryEventPage from "../pages/admin/GalleryEventPage";
 import GalleryEventDetailPage from "../pages/admin/GalleryEventDetailPage";
@@ -72,7 +69,6 @@ const AppRoutes = () => {
         <Route path="/courses" element={<CoursesPage />} />
         <Route path="/courses/category/:categoryId" element={<CoursesDetailPage />} />
         <Route path="/gallery" element={<GalleryPage />} />
-        <Route path="/gallery/:collegeId" element={<GalleryCollege />} />
         <Route path="/gallery/album/:id" element={<GalleryInfoPage />} />
         <Route path="/placements" element={<PlacementPage />} />
         <Route path="/placements/:year/:id" element={<PlacementStoryPage />} />
@@ -113,7 +109,6 @@ const AppRoutes = () => {
             <Route path="/eventdetail/add" element={<GalleryEventDetailPage />} />
             <Route path="/eventdetail/edit/:id" element={<GalleryEventDetailPage />} />
             {/* gallery college */}
-            <Route path="/gallerycollege" element={<GalleryCollegePage />} />
             <Route path="/eventcollege/add" element={<GalleryCollegeDetailPage />} />
             <Route path="/eventcollege/edit/:id" element={<GalleryCollegeDetailPage />} />
           {/* Courses */}
@@ -128,7 +123,6 @@ const AppRoutes = () => {
           <Route path="/placementdetail" element={<PlacementDetailPage />} />
           <Route path="/placementdetail/:id" element={<PlacementDetailPage />} />
           {/*  */}
-          <Route path="/visitdetail" element={<CollegeVisitDetailPage />} />
           <Route path="/registerdetail" element={<RegisterDetailPage />} />
           <Route path="/completedetail" element={<TestCompleteDetailPage />} />
           <Route
